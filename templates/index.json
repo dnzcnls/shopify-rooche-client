@@ -1,19 +1,23 @@
 {
+  "layout": "theme",
+
   "sections": {
     "header": {
       "type": "header"
     },
+
     "hero": {
       "type": "hero",
       "settings": {
         "eyebrow": "Collection — Automne / Hiver MMXXV",
         "heading": "Une ode au noir, à l'éternel.",
         "cta_primary_text": "Discover Ready-to-Wear",
-        "cta_primary_link": "/pages/ready-to-wear",
+        "cta_primary_link": "/collections/ready-to-wear",
         "cta_secondary_text": "Explore Joaillerie",
-        "cta_secondary_link": "/pages/joaillerie"
+        "cta_secondary_link": "/collections/jewelry"
       }
     },
+
     "manifesto": {
       "type": "manifesto",
       "settings": {
@@ -22,52 +26,96 @@
         "attribution": "Camille Delaunay, Directrice Artistique"
       }
     },
+
     "editorial": {
       "type": "editorial-split",
       "blocks": {
-        "card-1": { "type": "card", "settings": { "fallback_asset": "editorial-1.jpg", "chapter": "Chapitre I",  "title": "L'Atelier",    "link_text": "Ready-to-Wear", "link": "/pages/ready-to-wear" } },
-        "card-2": { "type": "card", "settings": { "fallback_asset": "editorial-2.jpg", "chapter": "Chapitre II", "title": "La Joaillerie", "link_text": "Fine Jewelry", "link": "/pages/joaillerie" } }
+        "card-1": {
+          "type": "card",
+          "settings": {
+            "fallback_asset": "editorial-1.jpg",
+            "chapter": "Chapitre I",
+            "title": "L'Atelier",
+            "link_text": "Ready-to-Wear",
+            "link": "/collections/ready-to-wear"
+          }
+        },
+        "card-2": {
+          "type": "card",
+          "settings": {
+            "fallback_asset": "editorial-2.jpg",
+            "chapter": "Chapitre II",
+            "title": "La Joaillerie",
+            "link_text": "Fine Jewelry",
+            "link": "/collections/jewelry"
+          }
+        }
       },
       "block_order": ["card-1", "card-2"]
     },
+
     "featured": {
-      "type": "product-showcase",
+      "type": "featured-collection",
       "settings": {
         "eyebrow": "Sélection",
         "title": "Pieces of the Season",
-        "columns": "4",
-        "view_all_text": "View All",
-        "view_all_link": "/pages/boutique"
-      },
-      "blocks": {
-        "p1": { "type": "product", "settings": { "fallback_asset": "product-coat.jpg",     "category": "Outerwear", "name": "Maison Belted Trench",   "price": "$2,480", "link": "/pages/boutique" } },
-        "p2": { "type": "product", "settings": { "fallback_asset": "product-dress.jpg",    "category": "Dresses",   "name": "Noir Bias Slip Dress",   "price": "$1,890", "link": "/pages/boutique" } },
-        "p3": { "type": "product", "settings": { "fallback_asset": "product-necklace.jpg", "category": "Necklaces", "name": "Muse Solitaire Pendant", "price": "$3,650", "link": "/pages/boutique" } },
-        "p4": { "type": "product", "settings": { "fallback_asset": "product-earrings.jpg", "category": "Earrings",  "name": "Perla Drop Earrings",    "price": "$1,240", "link": "/pages/boutique" } }
-      },
-      "block_order": ["p1", "p2", "p3", "p4"]
+        "collection": "frontpage",
+        "product_limit": 4,
+        "view_all_link": "/collections/all"
+      }
     },
+
     "jewelry-banner": {
       "type": "feature-banner",
       "settings": {
         "eyebrow": "Haute Joaillerie",
         "heading": "Brilliance, made intimate.",
         "cta_text": "Discover the Collection",
-        "cta_link": "/pages/joaillerie"
+        "cta_link": "/collections/jewelry"
       }
     },
+
     "services": {
       "type": "services",
       "blocks": {
-        "s1": { "type": "service", "settings": { "title": "Private Appointments", "text": "Reserve an intimate consultation in our ateliers in Paris, Milano, or Tokyo." } },
-        "s2": { "type": "service", "settings": { "title": "Complimentary Shipping", "text": "Hand-delivered worldwide in signature ivory and noir packaging." } },
-        "s3": { "type": "service", "settings": { "title": "Bespoke Atelier", "text": "Custom alterations and made-to-measure services for the Maison clientele." } }
+        "s1": {
+          "type": "service",
+          "settings": {
+            "title": "Private Appointments",
+            "text": "Reserve an intimate consultation in our ateliers in Paris, Milano, or Tokyo."
+          }
+        },
+        "s2": {
+          "type": "service",
+          "settings": {
+            "title": "Complimentary Shipping",
+            "text": "Hand-delivered worldwide in signature ivory and noir packaging."
+          }
+        },
+        "s3": {
+          "type": "service",
+          "settings": {
+            "title": "Bespoke Atelier",
+            "text": "Custom alterations and made-to-measure services for the Maison clientele."
+          }
+        }
       },
       "block_order": ["s1", "s2", "s3"]
     },
+
     "footer": {
       "type": "footer"
     }
   },
-  "order": ["header", "hero", "manifesto", "editorial", "featured", "jewelry-banner", "services", "footer"]
+
+  "order": [
+    "header",
+    "hero",
+    "manifesto",
+    "editorial",
+    "featured",
+    "jewelry-banner",
+    "services",
+    "footer"
+  ]
 }
