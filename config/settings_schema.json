@@ -27,5 +27,19 @@
       { "type": "text", "id": "social_instagram", "label": "Instagram URL" },
       { "type": "text", "id": "social_facebook", "label": "Facebook URL" }
     ]
+  },
+  {
+  "type": "footer",
+  "sections": {
+    "footer": { "type": "footer" }
+  },
+  "order": ["footer"]
+  },
+  {
+  "type": "header",
+  "sections": {
+    "header": { "type": "header" }
+  },
+  "order": ["header"]
   }
 ]
