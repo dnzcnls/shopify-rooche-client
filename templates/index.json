@@ -1,5 +1,11 @@
 {
+  "layout": "theme",
+
   "sections": {
+    "header": {
+      "type": "header"
+    },
+
     "hero": {
       "type": "hero",
       "settings": {
@@ -11,6 +17,7 @@
         "cta_secondary_link": "/collections/jewelry"
       }
     },
+
     "manifesto": {
       "type": "manifesto",
       "settings": {
@@ -19,6 +26,7 @@
         "attribution": "Camille Delaunay, Directrice Artistique"
       }
     },
+
     "editorial": {
       "type": "editorial-split",
       "blocks": {
@@ -45,6 +53,7 @@
       },
       "block_order": ["card-1", "card-2"]
     },
+
     "featured": {
       "type": "featured-collection",
       "settings": {
@@ -55,6 +64,7 @@
         "view_all_link": "/collections/all"
       }
     },
+
     "jewelry-banner": {
       "type": "feature-banner",
       "settings": {
@@ -64,15 +74,48 @@
         "cta_link": "/collections/jewelry"
       }
     },
+
     "services": {
       "type": "services",
       "blocks": {
-        "s1": { "type": "service", "settings": { "title": "Private Appointments", "text": "Reserve an intimate consultation in our ateliers in Paris, Milano, or Tokyo." } },
-        "s2": { "type": "service", "settings": { "title": "Complimentary Shipping", "text": "Hand-delivered worldwide in signature ivory and noir packaging." } },
-        "s3": { "type": "service", "settings": { "title": "Bespoke Atelier", "text": "Custom alterations and made-to-measure services for the Maison clientele." } }
+        "s1": {
+          "type": "service",
+          "settings": {
+            "title": "Private Appointments",
+            "text": "Reserve an intimate consultation in our ateliers in Paris, Milano, or Tokyo."
+          }
+        },
+        "s2": {
+          "type": "service",
+          "settings": {
+            "title": "Complimentary Shipping",
+            "text": "Hand-delivered worldwide in signature ivory and noir packaging."
+          }
+        },
+        "s3": {
+          "type": "service",
+          "settings": {
+            "title": "Bespoke Atelier",
+            "text": "Custom alterations and made-to-measure services for the Maison clientele."
+          }
+        }
       },
       "block_order": ["s1", "s2", "s3"]
+    },
+
+    "footer": {
+      "type": "footer"
     }
   },
-  "order": ["hero", "manifesto", "editorial", "featured", "jewelry-banner", "services"]
+
+  "order": [
+    "header",
+    "hero",
+    "manifesto",
+    "editorial",
+    "featured",
+    "jewelry-banner",
+    "services",
+    "footer"
+  ]
 }
