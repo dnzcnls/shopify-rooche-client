@@ -1,0 +1,40 @@
+<section class="hero">
+  {%- if section.settings.image != blank -%}
+    <img src="{{ section.settings.image | image_url: width: 1920 }}" alt="{{ section.settings.image.alt | escape }}" width="1920" height="1080">
+  {%- else -%}
+    <img src="{{ 'hero-1.jpg' | asset_url }}" alt="Maison Noir editorial" width="1600" height="1920">
+  {%- endif -%}
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    {%- if section.settings.eyebrow != blank -%}
+      <div class="hero-eyebrow">{{ section.settings.eyebrow }}</div>
+    {%- endif -%}
+    <h1 class="hero-title">{{ section.settings.heading }}</h1>
+    {%- if section.settings.cta_primary_text != blank or section.settings.cta_secondary_text != blank -%}
+      <div class="hero-ctas">
+        {%- if section.settings.cta_primary_text != blank -%}
+          <a href="{{ section.settings.cta_primary_link }}" class="btn" style="background:#fff; color:#0a0a0a;">{{ section.settings.cta_primary_text }}</a>
+        {%- endif -%}
+        {%- if section.settings.cta_secondary_text != blank -%}
+          <a href="{{ section.settings.cta_secondary_link }}" class="btn btn-outline-white">{{ section.settings.cta_secondary_text }}</a>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Hero",
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "Background image" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Collection — Automne / Hiver MMXXV" },
+    { "type": "textarea", "id": "heading", "label": "Heading", "default": "Une ode au noir, à l'éternel." },
+    { "type": "text", "id": "cta_primary_text", "label": "Primary CTA", "default": "Discover Ready-to-Wear" },
+    { "type": "url", "id": "cta_primary_link", "label": "Primary CTA link" },
+    { "type": "text", "id": "cta_secondary_text", "label": "Secondary CTA", "default": "Explore Joaillerie" },
+    { "type": "url", "id": "cta_secondary_link", "label": "Secondary CTA link" }
+  ],
+  "presets": [{ "name": "Hero" }]
+}
+{% endschema %}

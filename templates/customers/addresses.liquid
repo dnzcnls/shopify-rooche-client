@@ -1,0 +1,14 @@
+<section class="page-head">
+  <div class="page-eyebrow">{{ 'customer.addresses.title' | t }}</div>
+  <h1 class="page-title">Addresses</h1>
+</section>
+<section style="max-width:720px; margin: 48px auto; padding: 0 24px;">
+  <a href="{{ routes.account_url }}" class="text-xs tracking-luxe hover-underline">← Back to Account</a>
+  <div style="margin-top:32px;">
+    {%- for address in customer.addresses -%}
+      <div style="border:1px solid var(--border); padding:24px; margin-bottom:16px;">
+        {{ address | format_address }}
+      </div>
+    {%- endfor -%}
+  </div>
+</section>

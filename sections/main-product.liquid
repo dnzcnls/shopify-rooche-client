@@ -1,0 +1,135 @@
+{%- assign current_variant = product.selected_or_first_available_variant -%}
+
+<div class="breadcrumb">
+  <a href="{{ routes.root_url }}" class="hover-underline">Home</a> /
+  <a href="{{ routes.all_products_collection_url }}" class="hover-underline">Boutique</a> /
+  <span class="current">{{ product.title }}</span>
+</div>
+
+<section class="product-layout">
+  <div class="product-gallery">
+    <div class="product-gallery-main" data-gallery-main>
+      <img src="{{ current_variant.featured_image | default: product.featured_image | image_url: width: 1200 }}"
+           alt="{{ product.featured_image.alt | escape | default: product.title }}"
+           width="1200" height="1500">
+    </div>
+    {%- if product.images.size > 1 -%}
+      <div class="product-thumbs">
+        {%- for image in product.images limit: 8 -%}
+          <button class="product-thumb{% if forloop.first %} active{% endif %}"
+                  data-thumb data-src="{{ image | image_url: width: 1200 }}" type="button" aria-label="View image {{ forloop.index }}">
+            <img src="{{ image | image_url: width: 300 }}" alt="{{ image.alt | escape }}" loading="lazy">
+          </button>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+  </div>
+
+  <div class="product-info">
+    {%- if product.type != blank -%}<div class="product-cat">{{ product.type }}</div>{%- endif -%}
+    <h1 class="product-title">{{ product.title }}</h1>
+    <div class="product-price">{{ current_variant.price | money_without_trailing_zeros }}</div>
+
+    {%- if product.description != blank -%}
+      <div class="product-desc">{{ product.description }}</div>
+    {%- endif -%}
+
+    <form action="{{ routes.cart_add_url }}" method="post" enctype="multipart/form-data" data-product-form>
+      <input type="hidden" name="id" value="{{ current_variant.id }}">
+
+      {%- unless product.has_only_default_variant -%}
+        {%- for option in product.options_with_values -%}
+          <div class="option-group">
+            <div class="option-label-row">
+              <span>{{ option.name }}</span>
+              {%- if option.name == 'Size' -%}<span class="guide">Size Guide</span>{%- endif -%}
+            </div>
+            <div class="option-swatches" style="grid-template-columns: repeat({{ option.values.size | at_most: 6 }}, 1fr);">
+              {%- for value in option.values -%}
+                {%- assign matched_variant = nil -%}
+                {%- for v in product.variants -%}
+                  {%- if v.option1 == value and option.position == 1 -%}{%- assign matched_variant = v -%}{%- endif -%}
+                  {%- if v.option2 == value and option.position == 2 -%}{%- assign matched_variant = v -%}{%- endif -%}
+                  {%- if v.option3 == value and option.position == 3 -%}{%- assign matched_variant = v -%}{%- endif -%}
+                {%- endfor -%}
+                <button type="button" class="option-swatch"
+                        data-variant-id="{{ matched_variant.id }}"
+                        data-available="{{ matched_variant.available }}">
+                  {{ value }}
+                </button>
+              {%- endfor -%}
+            </div>
+          </div>
+        {%- endfor -%}
+      {%- endunless -%}
+
+      <div class="product-actions">
+        <button type="submit" class="btn btn-primary" data-add-btn>
+          <span data-add-label>
+            {%- if product.has_only_default_variant -%}
+              {%- if current_variant.available -%}Add to Bag{%- else -%}Sold Out{%- endif -%}
+            {%- else -%}
+              Add to Bag
+            {%- endif -%}
+          </span>
+        </button>
+        <button type="button" class="wishlist-btn" aria-label="Wishlist">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path></svg>
+        </button>
+      </div>
+    </form>
+
+    <div class="product-details">
+      <div class="product-details-title">Details</div>
+      <ul>
+        {%- if product.vendor != blank -%}<li>— {{ product.vendor }}</li>{%- endif -%}
+        {%- for tag in product.tags -%}<li>— {{ tag }}</li>{%- endfor -%}
+        {%- if product.tags.size == 0 and product.vendor == blank -%}
+          <li>— Crafted in Europe</li>
+          <li>— Hand-finished</li>
+          <li>— Sustainably sourced materials</li>
+        {%- endif -%}
+      </ul>
+    </div>
+
+    <div class="product-services">
+      <div>
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"/><path d="M15 18H9"/><path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.624l-3.48-4.35A1 1 0 0 0 17.52 8H14"/><circle cx="17" cy="18" r="2"/><circle cx="7" cy="18" r="2"/></svg>
+        Complimentary Shipping
+      </div>
+      <div>
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M3 21v-5h5"/></svg>
+        30-Day Returns
+      </div>
+      <div>
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        Secure Checkout
+      </div>
+    </div>
+  </div>
+</section>
+
+{%- if section.settings.show_related -%}
+  {%- assign related = collections[product.collections.first.handle].products | default: collections.all.products -%}
+  <section style="padding: 64px 24px; border-top: 1px solid var(--border);">
+    <h2 class="font-display" style="font-size:30px; margin-bottom:40px; padding-left: 24px;">You may also love</h2>
+    <div class="product-grid">
+      {%- assign shown = 0 -%}
+      {%- for p in related -%}
+        {%- if p.id != product.id and shown < 3 -%}
+          {% render 'product-card', product: p %}
+          {%- assign shown = shown | plus: 1 -%}
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  </section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Product",
+  "settings": [
+    { "type": "checkbox", "id": "show_related", "label": "Show related products", "default": true }
+  ]
+}
+{% endschema %}

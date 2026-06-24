@@ -1,0 +1,20 @@
+<section class="page-head">
+  <div class="page-eyebrow">Order {{ order.name }}</div>
+  <h1 class="page-title">Order Details</h1>
+</section>
+<section style="max-width:960px; margin: 48px auto; padding: 0 24px;">
+  <div style="font-size:14px; color:var(--muted-fg); margin-bottom:32px;">
+    Placed on {{ order.created_at | date: '%B %d, %Y' }} · Status: {{ order.fulfillment_status_label }}
+  </div>
+  <table style="width:100%; border-collapse:collapse; font-size:14px;">
+    <thead><tr style="border-bottom:1px solid var(--border); text-align:left;"><th style="padding:12px 0;">Item</th><th>Qty</th><th style="text-align:right;">Price</th></tr></thead>
+    <tbody>
+      {%- for line in order.line_items -%}
+        <tr style="border-bottom:1px solid var(--border);"><td style="padding:16px 0;">{{ line.title }}</td><td>{{ line.quantity }}</td><td style="text-align:right;">{{ line.final_line_price | money }}</td></tr>
+      {%- endfor -%}
+    </tbody>
+  </table>
+  <div style="text-align:right; margin-top:24px; font-family:var(--font-display); font-size:20px;">
+    Total: {{ order.total_price | money }}
+  </div>
+</section>

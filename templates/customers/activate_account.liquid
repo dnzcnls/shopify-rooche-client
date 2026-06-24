@@ -1,0 +1,15 @@
+<section class="page-head">
+  <div class="page-eyebrow">Activate Account</div>
+  <h1 class="page-title">Welcome</h1>
+  <p class="page-subtitle">Create a password to activate your Maison Noir account.</p>
+</section>
+<section style="max-width:420px; margin: 48px auto; padding: 0 24px;">
+  {%- form 'activate_customer_password' -%}
+    {%- if form.errors -%}
+      <ul class="errors-list">{%- for field in form.errors -%}<li>{{ form.errors.messages[field] }}</li>{%- endfor -%}</ul>
+    {%- endif -%}
+    <div class="field"><label>Password</label><input type="password" name="customer[password]" required></div>
+    <div class="field"><label>Confirm Password</label><input type="password" name="customer[password_confirmation]" required></div>
+    <button type="submit" class="btn btn-primary btn-block">Activate Account</button>
+  {%- endform -%}
+</section>

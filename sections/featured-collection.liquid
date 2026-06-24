@@ -1,0 +1,47 @@
+{%- assign collection = collections[section.settings.collection] -%}
+
+<section style="padding-top: 96px; padding-bottom: 96px;">
+  <div class="section-heading">
+    <div>
+      {%- if section.settings.eyebrow != blank -%}
+        <div class="section-eyebrow">{{ section.settings.eyebrow }}</div>
+      {%- endif -%}
+      <h2 class="section-title">{{ section.settings.title }}</h2>
+    </div>
+    {%- if section.settings.view_all_link != blank -%}
+      <a href="{{ section.settings.view_all_link }}" class="text-xs tracking-luxe hover-underline" style="display:none;" data-show-desktop>View All →</a>
+    {%- endif -%}
+  </div>
+
+  <div class="product-grid cols-4">
+    {%- if collection.products.size > 0 -%}
+      {%- for product in collection.products limit: section.settings.product_limit -%}
+        {% render 'product-card', product: product %}
+      {%- endfor -%}
+    {%- else -%}
+      {%- for i in (1..4) -%}
+        <div class="product-card">
+          <div class="product-card-img">{{ 'product-1' | placeholder_svg_tag }}</div>
+          <div class="product-card-cat">Category</div>
+          <div class="product-card-name">Product Name</div>
+          <div class="product-card-price">$0</div>
+        </div>
+      {%- endfor -%}
+    {%- endif -%}
+  </div>
+</section>
+<style>@media(min-width:768px){[data-show-desktop]{display:inline-block !important;}}</style>
+
+{% schema %}
+{
+  "name": "Featured collection",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Sélection" },
+    { "type": "text", "id": "title", "label": "Heading", "default": "Pieces of the Season" },
+    { "type": "collection", "id": "collection", "label": "Collection" },
+    { "type": "range", "id": "product_limit", "label": "Products to show", "min": 2, "max": 12, "step": 1, "default": 4 },
+    { "type": "url", "id": "view_all_link", "label": "View all link" }
+  ],
+  "presets": [{ "name": "Featured collection" }]
+}
+{% endschema %}

@@ -1,0 +1,87 @@
+{%- if section.settings.announcement_enabled -%}
+<div class="announcement">
+  <div class="marquee-track">
+    {%- for i in (1..2) -%}
+      <div>
+        {%- for block in section.blocks -%}
+          <span>{{ block.settings.text }}</span>
+          <span>·</span>
+        {%- endfor -%}
+      </div>
+    {%- endfor -%}
+  </div>
+</div>
+{%- endif -%}
+
+<header class="site-header" data-header>
+  <div class="header-grid">
+    <div style="display:flex; align-items:center; gap:24px;">
+      <button class="menu-toggle" data-menu-toggle aria-label="Menu">
+        {% render 'icon-menu' %}
+      </button>
+      <nav class="header-nav">
+        {%- for link in linklists[section.settings.menu].links -%}
+          <a href="{{ link.url }}" class="hover-underline">{{ link.title }}</a>
+        {%- endfor -%}
+      </nav>
+    </div>
+
+    <a href="{{ routes.root_url }}" class="header-logo">
+      <div class="header-logo-name">{{ section.settings.brand_name | default: shop.name | upcase }}</div>
+      {%- if section.settings.brand_tagline != blank -%}
+        <div class="header-logo-tag">{{ section.settings.brand_tagline }}</div>
+      {%- endif -%}
+    </a>
+
+    <div class="header-actions">
+      <a href="{{ routes.search_url }}" aria-label="Search">{% render 'icon-search' %}</a>
+      <a href="{{ routes.account_url }}" aria-label="Account">{% render 'icon-user' %}</a>
+      <a href="{{ routes.cart_url }}" aria-label="Cart" style="position:relative;">
+        {% render 'icon-bag' %}
+        <span class="cart-badge" data-cart-count{% if cart.item_count == 0 %} style="display:none;"{% endif %}>{{ cart.item_count }}</span>
+      </a>
+    </div>
+  </div>
+</header>
+
+<div class="mobile-menu" data-mobile-menu>
+  <div class="mobile-menu-top">
+    <span class="font-display" style="font-size:20px;">{{ section.settings.brand_name | default: shop.name | upcase }}</span>
+    <button data-menu-close aria-label="Close">{% render 'icon-close' %}</button>
+  </div>
+  <nav>
+    {%- for link in linklists[section.settings.menu].links -%}
+      <a href="{{ link.url }}">{{ link.title }}</a>
+    {%- endfor -%}
+    <a href="{{ routes.account_url }}">Account</a>
+  </nav>
+</div>
+
+{% schema %}
+{
+  "name": "Header",
+  "settings": [
+    { "type": "text", "id": "brand_name", "label": "Brand name", "default": "MAISON NOIR" },
+    { "type": "text", "id": "brand_tagline", "label": "Tagline", "default": "Paris — Est. MMXXV" },
+    { "type": "link_list", "id": "menu", "label": "Menu", "default": "main-menu" },
+    { "type": "checkbox", "id": "announcement_enabled", "label": "Show announcement bar", "default": true }
+  ],
+  "blocks": [
+    {
+      "type": "announcement",
+      "name": "Announcement",
+      "settings": [
+        { "type": "text", "id": "text", "label": "Text", "default": "Complimentary Worldwide Shipping" }
+      ]
+    }
+  ],
+  "default": {
+    "blocks": [
+      { "type": "announcement", "settings": { "text": "Complimentary Worldwide Shipping" } },
+      { "type": "announcement", "settings": { "text": "Maison Noir — Paris · Milano · Tokyo" } },
+      { "type": "announcement", "settings": { "text": "Atelier Appointments Available" } },
+      { "type": "announcement", "settings": { "text": "New Collection — Automne / Hiver" } }
+    ]
+  }
+}
+{% endschema %}

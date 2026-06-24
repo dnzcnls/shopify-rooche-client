@@ -1,0 +1,24 @@
+<section class="manifesto">
+  {%- if section.settings.eyebrow != blank -%}
+    <div class="section-eyebrow">{{ section.settings.eyebrow }}</div>
+  {%- endif -%}
+  <p class="manifesto-quote">{{ section.settings.quote }}</p>
+  {%- if section.settings.attribution != blank -%}
+    <div style="margin-top:32px; font-size:12px; letter-spacing:0.22em; text-transform:uppercase; color:var(--muted-fg);">
+      — {{ section.settings.attribution }}
+    </div>
+  {%- endif -%}
+</section>
+
+{% schema %}
+{
+  "name": "Manifesto",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Le Manifeste" },
+    { "type": "textarea", "id": "quote", "label": "Quote",
+      "default": "True elegance is the refusal of the unnecessary — the silhouette stripped to its essential grace." },
+    { "type": "text", "id": "attribution", "label": "Attribution", "default": "Camille Delaunay, Directrice Artistique" }
+  ],
+  "presets": [{ "name": "Manifesto" }]
+}
+{% endschema %}

@@ -1,0 +1,73 @@
+<footer class="site-footer">
+  {%- if section.settings.newsletter_enabled -%}
+  <div class="footer-newsletter">
+    <div>
+      <h3>{{ section.settings.newsletter_heading }}</h3>
+      <p>{{ section.settings.newsletter_text }}</p>
+    </div>
+    {%- form 'customer', class: 'newsletter-form' -%}
+      <input type="hidden" name="contact[tags]" value="newsletter">
+      <input type="email" name="contact[email]" placeholder="Your email address" required>
+      <button type="submit">Subscribe</button>
+    {%- endform -%}
+  </div>
+  {%- endif -%}
+
+  <div class="footer-cols">
+    <div>
+      <div class="footer-brand">{{ section.settings.brand_name | default: shop.name | upcase }}</div>
+      <p class="footer-brand-desc">{{ section.settings.brand_blurb }}</p>
+    </div>
+    {%- for block in section.blocks -%}
+      {%- if block.type == 'menu' -%}
+        <div class="footer-col">
+          <div class="footer-col-title">{{ block.settings.title }}</div>
+          <ul>
+            {%- for link in linklists[block.settings.menu].links -%}
+              <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+            {%- endfor -%}
+          </ul>
+        </div>
+      {%- endif -%}
+    {%- endfor -%}
+  </div>
+
+  <div class="footer-bottom">
+    <div>© {{ 'now' | date: '%Y' }} {{ shop.name }}. All rights reserved.</div>
+    <div class="footer-bottom-links">
+      <span>Legal</span><span>Privacy</span><span>Cookies</span><span>Accessibility</span>
+    </div>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Footer",
+  "settings": [
+    { "type": "text", "id": "brand_name", "label": "Brand name", "default": "MAISON NOIR" },
+    { "type": "textarea", "id": "brand_blurb", "label": "About blurb",
+      "default": "A Parisian house dedicated to the quiet authority of timeless dress and fine jewelry. Crafted in Europe, worn the world over." },
+    { "type": "checkbox", "id": "newsletter_enabled", "label": "Show newsletter", "default": true },
+    { "type": "text", "id": "newsletter_heading", "label": "Newsletter heading", "default": "Inscription au Journal" },
+    { "type": "text", "id": "newsletter_text", "label": "Newsletter text",
+      "default": "Receive private invitations, collection previews, and editorial notes from the Maison." }
+  ],
+  "blocks": [
+    {
+      "type": "menu",
+      "name": "Menu column",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Title", "default": "La Maison" },
+        { "type": "link_list", "id": "menu", "label": "Menu", "default": "footer" }
+      ]
+    }
+  ],
+  "default": {
+    "blocks": [
+      { "type": "menu", "settings": { "title": "La Maison" } },
+      { "type": "menu", "settings": { "title": "Client Services" } },
+      { "type": "menu", "settings": { "title": "Boutiques" } }
+    ]
+  }
+}
+{% endschema %}

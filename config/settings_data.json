@@ -1,0 +1,8 @@
+{
+  "name": "Maison Noir",
+  "theme_name": "Maison Noir",
+  "theme_author": "Maison Noir",
+  "theme_version": "1.0.0",
+  "current": "Default",
+  "presets": { "Default": {} }
+}

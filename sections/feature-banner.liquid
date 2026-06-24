@@ -1,0 +1,31 @@
+<section class="feature-banner">
+  {%- if section.settings.image != blank -%}
+    <img src="{{ section.settings.image | image_url: width: 1920 }}" alt="{{ section.settings.image.alt | escape }}" loading="lazy">
+  {%- else -%}
+    <img src="{{ 'hero-jewelry.jpg' | asset_url }}" alt="" loading="lazy">
+  {%- endif -%}
+  <div class="feature-banner-overlay"></div>
+  <div class="feature-banner-content">
+    {%- if section.settings.eyebrow != blank -%}
+      <div class="hero-eyebrow">{{ section.settings.eyebrow }}</div>
+    {%- endif -%}
+    <h2 class="feature-banner-title">{{ section.settings.heading }}</h2>
+    {%- if section.settings.cta_text != blank -%}
+      <a href="{{ section.settings.cta_link }}" class="btn btn-outline-white" style="margin-top:40px;">{{ section.settings.cta_text }}</a>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Feature banner",
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "Image" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Haute Joaillerie" },
+    { "type": "textarea", "id": "heading", "label": "Heading", "default": "Brilliance, made intimate." },
+    { "type": "text", "id": "cta_text", "label": "CTA text", "default": "Discover the Collection" },
+    { "type": "url", "id": "cta_link", "label": "CTA link" }
+  ],
+  "presets": [{ "name": "Feature banner" }]
+}
+{% endschema %}

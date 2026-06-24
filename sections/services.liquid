@@ -1,0 +1,34 @@
+<section class="services-grid">
+  {%- for block in section.blocks -%}
+    <div>
+      <div class="service-num">0{{ forloop.index }}</div>
+      <h3 class="service-title">{{ block.settings.title }}</h3>
+      <p class="service-desc">{{ block.settings.text }}</p>
+    </div>
+  {%- endfor -%}
+</section>
+
+{% schema %}
+{
+  "name": "Services",
+  "max_blocks": 4,
+  "blocks": [
+    {
+      "type": "service",
+      "name": "Service",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Title" },
+        { "type": "textarea", "id": "text", "label": "Text" }
+      ]
+    }
+  ],
+  "presets": [{
+    "name": "Services",
+    "blocks": [
+      { "type": "service", "settings": { "title": "Private Appointments", "text": "Reserve an intimate consultation in our ateliers in Paris, Milano, or Tokyo." } },
+      { "type": "service", "settings": { "title": "Complimentary Shipping", "text": "Hand-delivered worldwide in signature ivory and noir packaging." } },
+      { "type": "service", "settings": { "title": "Bespoke Atelier", "text": "Custom alterations and made-to-measure services for the Maison clientele." } }
+    ]
+  }]
+}
+{% endschema %}

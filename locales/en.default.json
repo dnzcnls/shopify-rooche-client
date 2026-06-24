@@ -1,0 +1,58 @@
+{
+  "general": {
+    "accessibility": {
+      "skip_to_content": "Skip to content"
+    },
+    "search": {
+      "heading": "Search",
+      "placeholder": "Search the Maison",
+      "submit": "Search"
+    },
+    "meta": {
+      "tags": "Tagged \"{{ tags }}\""
+    },
+    "404": {
+      "title": "404",
+      "subtext": "Page not found"
+    }
+  },
+  "products": {
+    "product": {
+      "add_to_cart": "Add to Bag",
+      "sold_out": "Sold Out",
+      "unavailable": "Unavailable"
+    }
+  },
+  "cart": {
+    "general": {
+      "title": "Shopping Bag",
+      "subtotal": "Subtotal",
+      "checkout": "Proceed to Checkout",
+      "empty": "Your bag is empty"
+    }
+  },
+  "customer": {
+    "account": {
+      "title": "My Account",
+      "details": "Account Details",
+      "view_addresses": "View Addresses",
+      "logout": "Sign Out"
+    },
+    "addresses": {
+      "title": "Addresses"
+    },
+    "login": {
+      "title": "Sign In",
+      "email": "Email",
+      "password": "Password",
+      "sign_in": "Sign In",
+      "forgot_password": "Forgot password?",
+      "create_account": "Create Account"
+    },
+    "register": {
+      "title": "Create Account",
+      "first_name": "First Name",
+      "last_name": "Last Name"
+    }
+  }
+}

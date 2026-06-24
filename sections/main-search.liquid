@@ -1,0 +1,29 @@
+<section class="page-head" style="padding-top: 96px;">
+  <div class="page-eyebrow">{{ 'general.search.heading' | t }}</div>
+  <h1 class="page-title">Search</h1>
+  <form action="{{ routes.search_url }}" method="get" style="max-width:480px; margin: 32px auto 0; display:flex; border-bottom: 1px solid var(--fg);">
+    <input type="search" name="q" value="{{ search.terms | escape }}" placeholder="Search the Maison" style="flex:1; border:0; background:transparent; padding:12px 0; outline:none; font-size:16px;">
+    <button type="submit" class="text-xs tracking-luxe">Search</button>
+  </form>
+</section>
+
+<section style="padding: 64px 24px;">
+  {%- if search.performed -%}
+    {%- if search.results_count > 0 -%}
+      <div class="collection-toolbar"><div>{{ search.results_count }} results for "{{ search.terms }}"</div><div></div></div>
+      <div class="product-grid">
+        {%- for item in search.results -%}
+          {%- if item.object_type == 'product' -%}
+            {% render 'product-card', product: item %}
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    {%- else -%}
+      <p style="text-align:center; padding:64px; color:var(--muted-fg);">No results for "{{ search.terms }}"</p>
+    {%- endif -%}
+  {%- endif -%}
+</section>
+
+{% schema %}
+{ "name": "Search" }
+{% endschema %}
